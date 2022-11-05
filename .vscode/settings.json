@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "oscibear_hal_baseband.h": "c",
+        "oscibear_hal_clint.h": "c",
+        "oscibear.h": "c",
+        "bearlyml.h": "c",
+        "oscibear_hal.h": "c",
+        "main.h": "c"
+    }
+}

@@ -1,0 +1,324 @@
+<device xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="1.1" xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
+  <name>OsciArty</name>
+  <version>0.8</version>
+  <description>OsciBear on Arty</description>
+  <cpu>
+    <name>RISCV</name>
+    <revision>r1p1</revision>
+    <endian>little</endian>
+    <mpuPresent>false</mpuPresent>
+    <fpuPresent>false</fpuPresent>
+    <nvicPrioBits>4</nvicPrioBits>
+    <vendorSystickConfig>false</vendorSystickConfig>
+  </cpu>
+  <addressUnitBits>8</addressUnitBits>
+  <width>32</width>
+  <size>0x20</size>
+  <resetValue>0x0</resetValue>
+  <resetMask>0xFFFFFFFF</resetMask>
+  <peripherals>
+    <peripheral>
+      <name>GPIOA</name>
+      <description>General purpose I/O</description>
+      <groupName>GPIO</groupName>
+      <baseAddress>0x10012000</baseAddress>
+      <addressBlock>
+        <offset>0x0</offset>
+        <size>0x400</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <register>
+          <name>INPUT_VAL</name>
+          <description>input value</description>
+          <addressOffset>0x00</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>VAL0</name>
+              <description>Input value of pin 0</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>VAL1</name>
+              <description>Input value of pin 1</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>VAL2</name>
+              <description>Input value of pin 2</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>INPUT_EN</name>
+          <description>input enable</description>
+          <addressOffset>0x04</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>EN0</name>
+              <description>Input enable control of pin 0</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues>
+                <name>EN0</name>
+                <usage>read-write</usage>
+                <enumeratedValue><name>Enabled</name><description>Enable input</description><value>1</value></enumeratedValue>
+                <enumeratedValue><name>Disabled</name><description>Disable input</description><value>0</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>EN1</name>
+              <description>Input enable control of pin 1</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues derivedFrom="EN0"/>
+            </field>
+            <field>
+              <name>EN2</name>
+              <description>Input enable control of pin 2</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues derivedFrom="EN0"/>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>OUTPUT_EN</name>
+          <description>output enable</description>
+          <addressOffset>0x08</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>EN0</name>
+              <description>Output enable control of pin 0</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues>
+                <name>EN0</name>
+                <usage>read-write</usage>
+                <enumeratedValue><name>Enabled</name><description>Enable output</description><value>1</value></enumeratedValue>
+                <enumeratedValue><name>Disabled</name><description>Disable output</description><value>0</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>EN1</name>
+              <description>Output enable control of pin 1</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues derivedFrom="EN0"/>
+            </field>
+            <field>
+              <name>EN2</name>
+              <description>Output enable control of pin 2</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues derivedFrom="EN0"/>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>OUTPUT_VAL</name>
+          <description>output value</description>
+          <addressOffset>0x0C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>VAL0</name>
+              <description>Output value of pin 0</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues>
+                <name>VAL0</name>
+                <usage>read-write</usage>
+                <enumeratedValue><name>High</name><description>Set output to logic high</description><value>1</value></enumeratedValue>
+                <enumeratedValue><name>Low</name><description>Set output to logic low</description><value>0</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>VAL1</name>
+              <description>Output value of pin 1</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues derivedFrom="VAL0"/>
+            </field>
+            <field>
+              <name>VAL2</name>
+              <description>Output value of pin 2</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues derivedFrom="VAL0"/>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral>
+      <name>UART0</name>
+      <description>Universal Asynchronous Receiver/Transmitter</description>
+      <groupName>UART</groupName>
+      <baseAddress>0x54000000</baseAddress>
+      <addressBlock>
+        <offset>0x0</offset>
+        <size>0x400</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <register>
+          <name>TXDATA</name>
+          <description>transmit data register</description>
+          <addressOffset>0x00</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DATA</name>
+              <description>Transmit data</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+            <field>
+              <name>FULL</name>
+              <description>Transmit FIFO full</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues>
+                <name>FULL</name>
+                <usage>read-only</usage>
+                <enumeratedValue><name>Full</name><description>Transmit FIFO is full</description><value>1</value></enumeratedValue>
+                <enumeratedValue><name>Not full</name><description>Transmit FIFO is not full</description><value>0</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RXDATA</name>
+          <description>receive data register</description>
+          <addressOffset>0x04</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <resetValue>0x80000000</resetValue>
+          <fields>
+            <field>
+              <name>DATA</name>
+              <description>Received data</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+            <field>
+              <name>EMPTY</name>
+              <description>Receive FIFO empty</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues>
+                <name>EMPTY</name>
+                <usage>read-only</usage>
+                <enumeratedValue><name>Empty</name><description>Receive FIFO is empty</description><value>1</value></enumeratedValue>
+                <enumeratedValue><name>Not empty</name><description>Receive FIFO is not empty</description><value>0</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TXCTRL</name>
+          <description>transmit control register</description>
+          <addressOffset>0x08</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>TXEN</name>
+              <description>Transmit enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues>
+                <name>TXEN</name>
+                <usage>read-write</usage>
+                <enumeratedValue><name>Enabled</name><description>Transmit enabled</description><value>1</value></enumeratedValue>
+                <enumeratedValue><name>Disabled</name><description>Transmit disabled</description><value>0</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>NSTOP</name>
+              <description>Number of stop bits</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues>
+                <name>NSTOP</name>
+                <usage>read-write</usage>
+                <enumeratedValue><name>2 stop bits</name><description>2 stop bits</description><value>1</value></enumeratedValue>
+                <enumeratedValue><name>1 stop bit</name><description>1 stop bit</description><value>0</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>TXCNT</name>
+              <description>Transmit watermark level</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RXCTRL</name>
+          <description>receive control register</description>
+          <addressOffset>0x0C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>RXEN</name>
+              <description>Receive enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues>
+                <name>RXEN</name>
+                <usage>read-write</usage>
+                <enumeratedValue><name>Enabled</name><description>Receive enabled</description><value>1</value></enumeratedValue>
+                <enumeratedValue><name>Disabled</name><description>Receive disabled</description><value>0</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RXCNT</name>
+              <description>Receive watermark level</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <register>
+          <name>DIV</name>
+          <description>baudrate divisor</description>
+          <addressOffset>0x18</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x000000AD</resetValue>
+          <fields>
+            <field>
+              <name>DIV</name>
+              <description>Baudrate divisor</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>16</bitWidth>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+  </peripherals>
+</device>

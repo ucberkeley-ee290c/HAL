@@ -1,0 +1,45 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Cortex Debug",
+            "type": "cortex-debug",
+            "cwd": "${workspaceRoot}",
+            "executable": "${workspaceRoot}/firmware/build/firmware.elf",
+            "request": "launch",
+            "servertype": "openocd",
+            "serverpath": "openocd",
+            "toolchainPrefix": "riscv64-unknown-elf",
+            "configFiles": [
+                "jtag/bearlyarty.cfg"
+            ],
+            "searchDir": [],
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "none"
+
+            "svdFile": "${workspaceRoot}/jtag/bearlyarty.svd",
+
+            "numberOfProcessors": 5,
+            "currentProcessor": 1
+        },
+        {
+            "name": "OpenOCD GDB Debug",
+            "type": "gdb",
+            "request": "launch",
+            "target": "${workspaceRoot}/firmware/build/firmware.elf",
+            "cwd": "${workspaceRoot}",
+            "gdbpath": "riscv64-unknown-elf-gdb",
+            "valuesFormatting": "parseText",
+            "autorun": [
+                "set remotetimeout 60",
+                "target extended-remote | openocd -c \"gdb_port pipe\" -f jtag/osciarty.cfg -c \"debug_level 2; init\"",
+                "load firmware/build/firmware.elf",
+                // "break main",
+                "monitor reset"
+            ]
+        }
+    ]
+}
