@@ -5,7 +5,8 @@
 int main() {
 
   // testAES_ECB_singlePoll();
-  hello_world();
+  // hello_world();
   // testInterrupt();
   // testCompiler();
+  test_SpAccel();
 }

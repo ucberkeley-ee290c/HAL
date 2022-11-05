@@ -73,6 +73,7 @@ SECTIONS {
   
   /* bss segment */
   .sbss (NOLOAD) : {
+    . = ALIGN(8);
     _sbss = .;
     *(.sbss .sbss.* .gnu.linkonce.sb.*)
     *(.scommon)
