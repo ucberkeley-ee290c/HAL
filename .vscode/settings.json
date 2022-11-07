@@ -11,6 +11,8 @@
         "tinyrocket_hal_uart.h": "c",
         "tinyrocket.h": "c",
         "stdint.h": "c",
-        "rv_core.h": "c"
-    }
+        "rv_core.h": "c",
+        "tinyrocket_hal_plic.h": "c"
+    },
+    "cortex-debug.registerUseNaturalFormat": false
 }

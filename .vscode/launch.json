@@ -7,14 +7,14 @@
         {
             "name": "Cortex Debug",
             "type": "cortex-debug",
-            "cwd": "${workspaceRoot}",
+            "cwd": "${workspaceRoot}/firmware/",
             "executable": "${workspaceRoot}/firmware/build/firmware.elf",
             "request": "launch",
             "servertype": "openocd",
             "serverpath": "openocd",
             "toolchainPrefix": "riscv64-unknown-elf",
             "configFiles": [
-                "jtag/tinyrocket.cfg"
+                "${workspaceRoot}/jtag/tinyrocket.cfg"
             ],
             "searchDir": [],
             "runToEntryPoint": "main",

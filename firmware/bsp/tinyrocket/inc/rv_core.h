@@ -22,6 +22,13 @@
 #define WRITE_BITS(REG, CLEARMASK, SETMASK)   ((REG) = (((REG) & (~(CLEARMASK))) | (SETMASK)))
 
 typedef enum {
+  DISABLE = 0U,
+  ENABLE = 1U,
+  LOW = 0U,
+  HIGH = 1U,
+} State;
+
+typedef enum {
   OK = 0U,
   ERROR,
   BUSY,
