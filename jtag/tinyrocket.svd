@@ -1,0 +1,372 @@
+<device xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="1.1" xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
+  <name>TinyRocket</name>
+  <version>0.8</version>
+  <description>TinyRocket on Arty</description>
+  <cpu>
+    <name>RISCV</name>
+    <revision>rv32imac</revision>
+    <endian>little</endian>
+    <mpuPresent>0</mpuPresent>
+    <fpuPresent>0</fpuPresent>
+    <nvicPrioBits>4</nvicPrioBits>
+    <vendorSystickConfig>0</vendorSystickConfig>
+  </cpu>
+  <addressUnitBits>8</addressUnitBits>
+  <width>32</width>
+  <size>0x20</size>
+  <resetValue>0x0</resetValue>
+  <resetMask>0xFFFFFFFF</resetMask>
+  <peripherals>
+    <peripheral>
+      <name>BOOT_SELECT</name>
+      <description>Boot Selection Pin</description>
+      <groupName>BOOT_SELECT</groupName>
+      <baseAddress>0x00004000</baseAddress>
+      <addressBlock>
+        <offset>0x0</offset>
+        <size>0x400</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <register>
+          <name>BOOT_SEL</name>
+          <description>boot select</description>
+          <addressOffset>0x00</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>VAL0</name>
+              <description>Input value of pin 0</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues>
+                <name>EN0</name>
+                <usage>read-only</usage>
+                <enumeratedValue><name>Self Boot</name><description>Self-Boot Mode</description><value>1</value></enumeratedValue>
+                <enumeratedValue><name>Tethered</name><description>Tethered Boot Mode</description><value>0</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+
+    <peripheral>
+      <name>CLINT</name>
+      <description>Core-Local Interruptor</description>
+      <groupName>CLINT</groupName>
+      <baseAddress>0x02000000</baseAddress>
+      <addressBlock>
+        <offset>0x0</offset>
+        <size>0x400</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <register>
+          <name>MSIP0</name>
+          <description>hart 0 msip bit</description>
+          <addressOffset>0x00</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>MSIP0</name>
+              <description>hart 0 machine mode software interrupt in progress</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues>
+                <name>EN0</name>
+                <usage>read-write</usage>
+                <enumeratedValue><name>Interrupt pending</name><description>Self-Boot Mode</description><value>1</value></enumeratedValue>
+                <enumeratedValue><name>No interrupt</name><description>Tethered Boot Mode</description><value>0</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>MTIMECMP0</name>
+          <description>hart 0 mtimecmp value</description>
+          <addressOffset>0x4000</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>MTIMECMP0</name>
+              <description>hart 0 machine mode timer compare value</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>64</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>MTIME</name>
+          <description>mtime value</description>
+          <addressOffset>0xBFF8</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>MTIME</name>
+              <description>machine mode timer value</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>64</bitWidth>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+
+    <peripheral>
+      <name>RCC</name>
+      <description>Reset and Clock Control</description>
+      <groupName>RCC</groupName>
+      <baseAddress>0x00100000</baseAddress>
+      <addressBlock>
+        <offset>0x0</offset>
+        <size>0x400</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <register>
+          <name>TILE0_RESET</name>
+          <description>RocketTile 0 reset control</description>
+          <addressOffset>0x00</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>TILE0_RESET</name>
+              <description>RocketTile 0 reset control</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TILE1_RESET</name>
+          <description>RocketTile 1 reset control</description>
+          <addressOffset>0x04</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>TILE1_RESET</name>
+              <description>RocketTile 1 reset control</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TILE2_RESET</name>
+          <description>RocketTile 2 reset control</description>
+          <addressOffset>0x08</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>TILE2_RESET</name>
+              <description>RocketTile 2 reset control</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TILE3_RESET</name>
+          <description>RocketTile 3 reset control</description>
+          <addressOffset>0x0C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>TILE3_RESET</name>
+              <description>RocketTile 3 reset control</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TILE4_RESET</name>
+          <description>SaturnTile reset control</description>
+          <addressOffset>0x10</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>TILE4_RESET</name>
+              <description>SaturnTile reset control</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+
+    <peripheral>
+      <name>UART0</name>
+      <description>Universal Asynchronous Receiver/Transmitter</description>
+      <groupName>UART</groupName>
+      <baseAddress>0x10013000</baseAddress>
+      <addressBlock>
+        <offset>0x0</offset>
+        <size>0x400</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <register>
+          <name>TXDATA</name>
+          <description>transmit data register</description>
+          <addressOffset>0x00</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DATA</name>
+              <description>Transmit data</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+            <field>
+              <name>FULL</name>
+              <description>Transmit FIFO full</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues>
+                <name>FULL</name>
+                <usage>read-only</usage>
+                <enumeratedValue><name>Full</name><description>Transmit FIFO is full</description><value>1</value></enumeratedValue>
+                <enumeratedValue><name>Not full</name><description>Transmit FIFO is not full</description><value>0</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RXDATA</name>
+          <description>receive data register</description>
+          <addressOffset>0x04</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <resetValue>0x80000000</resetValue>
+          <fields>
+            <field>
+              <name>DATA</name>
+              <description>Received data</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+            <field>
+              <name>EMPTY</name>
+              <description>Receive FIFO empty</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues>
+                <name>EMPTY</name>
+                <usage>read-only</usage>
+                <enumeratedValue><name>Empty</name><description>Receive FIFO is empty</description><value>1</value></enumeratedValue>
+                <enumeratedValue><name>Not empty</name><description>Receive FIFO is not empty</description><value>0</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TXCTRL</name>
+          <description>transmit control register</description>
+          <addressOffset>0x08</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>TXEN</name>
+              <description>Transmit enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues>
+                <name>TXEN</name>
+                <usage>read-write</usage>
+                <enumeratedValue><name>Enabled</name><description>Transmit enabled</description><value>1</value></enumeratedValue>
+                <enumeratedValue><name>Disabled</name><description>Transmit disabled</description><value>0</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>NSTOP</name>
+              <description>Number of stop bits</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues>
+                <name>NSTOP</name>
+                <usage>read-write</usage>
+                <enumeratedValue><name>2 stop bits</name><description>2 stop bits</description><value>1</value></enumeratedValue>
+                <enumeratedValue><name>1 stop bit</name><description>1 stop bit</description><value>0</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>TXCNT</name>
+              <description>Transmit watermark level</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RXCTRL</name>
+          <description>receive control register</description>
+          <addressOffset>0x0C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>RXEN</name>
+              <description>Receive enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues>
+                <name>RXEN</name>
+                <usage>read-write</usage>
+                <enumeratedValue><name>Enabled</name><description>Receive enabled</description><value>1</value></enumeratedValue>
+                <enumeratedValue><name>Disabled</name><description>Receive disabled</description><value>0</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RXCNT</name>
+              <description>Receive watermark level</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DIV</name>
+          <description>baudrate divisor</description>
+          <addressOffset>0x18</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x000000AD</resetValue>
+          <fields>
+            <field>
+              <name>DIV</name>
+              <description>Baudrate divisor</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>16</bitWidth>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+  </peripherals>
+</device>
