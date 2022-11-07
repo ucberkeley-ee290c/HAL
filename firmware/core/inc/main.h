@@ -8,7 +8,7 @@ extern "C" {
 
 #include <string.h>
 
-#include "bearlyml_hal.h"
+#include "oscibear_hal.h"
 
 int main();
 
