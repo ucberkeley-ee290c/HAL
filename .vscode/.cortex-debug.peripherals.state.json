@@ -1,1 +1,1 @@
-[{"node":"CLINT","expanded":true,"format":0,"pinned":false},{"node":"CLINT.MTIME","expanded":true,"format":0},{"node":"UART0","expanded":true,"format":0,"pinned":false},{"node":"UART0.TXDATA","expanded":true,"format":0},{"node":"UART0.TXCTRL","expanded":true,"format":0}]
+[{"node":"CLINT.MTIME","expanded":true,"format":0},{"node":"UART0","expanded":true,"format":0,"pinned":false},{"node":"UART0.TXDATA","expanded":true,"format":0},{"node":"UART0.TXCTRL","expanded":true,"format":0}]
