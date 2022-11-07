@@ -5,6 +5,12 @@
         "oscibear.h": "c",
         "bearlyml.h": "c",
         "oscibear_hal.h": "c",
-        "main.h": "c"
+        "main.h": "c",
+        "oscibear_hal_core.h": "c",
+        "tinyrocket_hal.h": "c",
+        "tinyrocket_hal_uart.h": "c",
+        "tinyrocket.h": "c",
+        "stdint.h": "c",
+        "rv_core.h": "c"
     }
 }

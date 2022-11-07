@@ -1,17 +1,16 @@
 
 TARGET ?= firmware
 
-CHIP ?= bearlyml
+# CHIP ?= oscibear
+# CHIP ?= bearlyml
+CHIP ?= tinyrocket
 
 #################################
 # RISCV Toolchain
 #################################
 
-# SiFive Toolchain
+# SiFive / RISC-V Collab Toolchain
 PREFIX = riscv64-unknown-elf-
-
-# Nuclei Toolchain
-# PREFIX = riscv-nuclei-elf-
 
 # xPack Toolchain
 # when using this, MCU arch should be `ARCH = rv32imafc_zicsr`
@@ -45,19 +44,28 @@ C_SOURCES  = $(wildcard $(SRC_DIR)*.c) $(wildcard $(SRC_DIR)*/*.c)
 
 A_SOURCES += $(VENDOR_ROOT)$(CHIP)/startup/$(CHIP)_startup.S
 
+# common drivers for all RV cores
 C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal.c
 C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_system.c
 C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_core.c
+C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_clint.c
+C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_plic.c
 
-ifeq ($(CHIP),(oscibear))
+ifeq ($(CHIP),oscibear)
 C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_aes.c
 C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_baseband.c
-endif
-C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_clint.c
 C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_gpio.c
-C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_plic.c
 C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_rcc.c
 C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_uart.c
+endif
+ifeq ($(CHIP),bearlyml)
+C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_gpio.c
+C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_rcc.c
+C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_uart.c
+endif
+ifeq ($(CHIP),tinyrocket)
+C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_uart.c
+endif
 
 INCLUDES  = -I$(INC_DIR)
 INCLUDES += -I$(INC_DIR)hal/
@@ -86,19 +94,25 @@ TARGET_VERILOG = $(BUILD_DIR)$(TARGET).out
 #################################
 
 # MCU Settings
-ifeq ($(CHIP),(oscibear))
+ifeq ($(CHIP),oscibear)
 ARCH = rv32imafc
 ABI = ilp32f
-else ifeq ($(CHIP),(scumv))
+endif
+ifeq ($(CHIP),scumv)
 ARCH = rv32imafc
 ABI = ilp32f
-else
+endif
+ifeq ($(CHIP),tinyrocket)
+ARCH = rv32imac
+ABI = ilp32
+endif
+ifeq ($(CHIP),scumv)
 ARCH = rv64imac
 ABI = lp64
 endif
 CODEMODEL = medany
-# LD_SCRIPT = $(SRC_DIR)$(CHIP).ld
-LD_SCRIPT = $(SRC_DIR)bearlyarty.ld
+LD_SCRIPT = $(SRC_DIR)$(CHIP).ld
+# LD_SCRIPT = $(SRC_DIR)bearlyarty.ld
 
 ARCHFLAGS = -march=$(ARCH) -mabi=$(ABI) -mcmodel=$(CODEMODEL) -fno-pie
 SPECFLAGS = --specs="nano.specs"
