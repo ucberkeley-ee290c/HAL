@@ -1,39 +1,5 @@
 # FPGA Prototyping
 
-## Bitstreams Catalog
-
-### bearlyarty
-
-#### `bearlyarty_1_rocket_1_saturn.bit`
-
-- no FPU on rocket (using TinyRocket config)
-
-- 32Mhz peripheral clock (affects mtime and UART)
-
-- could not probe into Saturn core, all JTAG command returns `0x01`
-
-#### `bearlyarty_2_rocket.bit`
-
-- cannot examine target
-
-#### `bearlyarty_1_rocket_fpu.bit`
-
-- add FPU on rocket
-
-### osciarty
-
-#### `osciarty_32MHz.bit`
-
-- 32Mhz peripheral clock (affects mtime and UART)
-
-- TL not working
-
-#### `osciarty_148kHz.bit`
-
-- 148kHz system & Serial-TL clock
-
-- throttle down to be compatible with MCU bringup setup
-
 ## Wiring
 
 Arty JD port
@@ -45,7 +11,7 @@ Arty JD port
 
 Note: `nTRST` is JTAG reset, `nRST` is system reset. For a minimal set up, the two reset lines do not need to be connected.
 
-![](docs/jtag_connection.jpg)
+![](img/jtag_connection.jpg)
 
 ## Software Setup
 
@@ -53,15 +19,15 @@ Note: `nTRST` is JTAG reset, `nRST` is system reset. For a minimal set up, the t
 
 2. Open vivado, open hardware manager
 
-![](docs/vivado_hardware_manager.png)
+![](img/vivado_hardware_manager.png)
 
 3. Click "Open target" -> "Auto Connect"
 
-![](docs/vivado_auto_connect.png)
+![](img/vivado_auto_connect.png)
 
 4. Click "Program device", then select the downloaded bitstream and click "Program"
 
-![](docs/vivado_program_device.png)
+![](img/vivado_program_device.png)
 
 5. 
 
