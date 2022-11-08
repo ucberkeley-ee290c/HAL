@@ -1,5 +1,58 @@
 # FPGA Prototyping
 
+## Bitsteam Catalog
+
+### OsciArty
+
+#### `osciarty_32MHz.bit`
+
+OsciArty with core running at 32MHz (RV32IMAFC)
+
+- UART should use 32MHz setting
+
+- Serial-TileLink not working (TL_CLK signal direction is wrong). DO NOT CONNECT TL PORT.
+
+#### `osciarty_148kHz.bit`
+
+OsciArty with core running at 148kHz (RV32IMAFC)
+
+- Serial-TileLink working at 148kHz
+
+### TinyRocketArty
+
+#### `tinyrocketarty.bit`
+
+Default chipyard Arty bitstream. Core clock at 32MHz. (RV32IMAC)
+
+#### `tinyrocketarty_UART_remapped.bit`
+
+Default chipyard Arty bitstream with UART remapped to JTAG debugger. Core clock at 32MHz. (RV32IMAC)
+
+### BearlyArty
+
+#### `bearlyarty_1_rocket_1_saturn.bit`
+
+Rocket core with accelerators and without FPU (RV64IMAC).
+
+I2C connection is ja_1 == SCL, ja_0 == SDA.
+
+|     |     |       |       |       | square pad |
+| --- | --- | ----- | ----- | ----- | ---------- |
+| 3V3 | GND | NC    | NC    | SCL   | SDA        |
+| 3V3 | GND | NC    | NC    | NC    | NC         |
+
+Saturn core cannot be JTAG probed. Any read returns a 0x01.
+
+#### `bearlyarty_1_rocket_w_fpu.bit`
+
+Single core Rocket core with accelerators and FPU (RV64IMAFC).
+
+#### `bearlyarty_2_rocket.bit`
+
+Dual Rocket core with accelerators (RV64IMAC).
+
+Not working... JTAG cannot examine target.
+
 ## Wiring
 
 Arty JD port
