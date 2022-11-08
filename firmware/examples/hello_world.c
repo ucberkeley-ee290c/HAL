@@ -14,22 +14,21 @@
 //     HAL_UART_transmit(UART0, (uint8_t *)str, strlen(str), 0);
 //     HAL_delay(1000);
 
-//     // // I2C Test
-//     // // 1. generate start command
-//     // // 2. write slave address + start bit
-//     // I2C0->DATA = 0xCA;
-//     // SET_BITS(I2C0->STAT, I2C_STAT_RXACK_STA_MSK | I2C_STAT_RD_MSK);
-//     // // 3. receive ACK from slave
-//     // while (READ_BITS(I2C0->STAT, I2C_STAT_TIP_MSK)) {}
+    // // I2C Test
+    // // 1. generate start command
+    // // 2. write slave address + start bit
+    // I2C0->DATA = 0xCA;
+    // SET_BITS(I2C0->STAT_CMD, I2C_STAT_CMD_RXACK_STA_MSK | I2C_STAT_CMD_RD_MSK);
+    // // 3. receive ACK from slave
+    // while (READ_BITS(I2C0->STAT_CMD, I2C_STAT_CMD_TIP_MSK)) {}
 
-//     // // 4. write data
-//     // I2C0->DATA = 0xCB;
+    // // 4. write data
+    // I2C0->DATA = 0xCB;
 
-//     // // 5. receive ACK from slave
-//     // while (READ_BITS(I2C0->STAT, I2C_STAT_TIP_MSK)) {}
+    // // 5. receive ACK from slave
+    // while (READ_BITS(I2C0->STAT_CMD, I2C_STAT_CMD_TIP_MSK)) {}
 
-//     // // 6. generate stop command
-//     // SET_BITS(I2C0->STAT, I2C_STAT_BUSY_STO_MSK);
-
+    // // 6. generate stop command
+    // SET_BITS(I2C0->STAT_CMD, I2C_STAT_CMD_BUSY_STO_MSK);
 //   }
 // }

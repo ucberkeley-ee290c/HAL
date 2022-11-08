@@ -36,7 +36,7 @@ SECTIONS {
     
     *(.gnu.linkonce.t.*)
     _etext = .;                   /* define a global symbols at end of code */
-  }> SRAM
+  }> FLASH
   
   .rodata : {
     . = ALIGN(4);
@@ -48,7 +48,7 @@ SECTIONS {
     *(.srodata.cst4)
     *(.srodata.cst2)
     *(.srodata .srodata.*)
-  }> SRAM
+  }> FLASH
 
   /* data segment */
   .data : {

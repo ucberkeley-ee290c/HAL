@@ -11,7 +11,6 @@ extern "C" {
 
 #define UART_FIFO_DEPTH   8
 
-
 #define UART_MODE_RX                    0x01U
 #define UART_MODE_TX                    0x02U
 #define UART_MODE_TX_RX                 0x03U

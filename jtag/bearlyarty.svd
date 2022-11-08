@@ -1155,7 +1155,7 @@
               <bitWidth>1</bitWidth>
             </field>
             <field>
-              <name>RXACL/STA</name>
+              <name>RXACK/STA</name>
               <description>acknowledge status / start condition</description>
               <bitOffset>7</bitOffset>
               <bitWidth>1</bitWidth>

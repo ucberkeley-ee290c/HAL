@@ -6,7 +6,6 @@
 extern "C" {
 #endif
 
-#include <stdint.h>
 #include "rv_core.h"
 
 /* IRQ Definition */
