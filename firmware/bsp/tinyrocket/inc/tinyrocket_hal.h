@@ -16,7 +16,7 @@ extern "C" {
 
 // #define SYS_CLK_FREQ  200000                    // Hz
 #define SYS_CLK_FREQ  32000000                  // Hz
-#define MTIME_FREQ    (SYS_CLK_FREQ / 1000000)    // tick per milliseconds
+#define MTIME_FREQ    (SYS_CLK_FREQ / 2500000)    // tick per milliseconds
 
 void HAL_init();
 

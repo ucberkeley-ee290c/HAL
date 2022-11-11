@@ -2,6 +2,8 @@
 #ifndef __RV_CORE_H
 #define __RV_CORE_H
 
+#include <stdint.h>
+
 #ifdef __cplusplus
   #define   __I     volatile             /** Defines "read only" permissions */
 #else
@@ -20,6 +22,17 @@
 #define CLEAR_BITS(REG, BIT)                  ((REG) &= ~(BIT))
 #define READ_BITS(REG, BIT)                   ((REG) & (BIT))
 #define WRITE_BITS(REG, CLEARMASK, SETMASK)   ((REG) = (((REG) & (~(CLEARMASK))) | (SETMASK)))
+
+typedef enum {
+  RESET = 0UL,
+  SET   = !RESET,
+
+  DISABLE = RESET,
+  ENABLE  = SET,
+  
+  LOW   = RESET,
+  HIGH  = SET,
+} State;
 
 typedef enum {
   OK = 0U,

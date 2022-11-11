@@ -2,8 +2,8 @@
 TARGET ?= firmware
 
 # CHIP ?= oscibear
-# CHIP ?= bearlyml
-CHIP ?= tinyrocket
+CHIP ?= bearlyml
+# CHIP ?= tinyrocket
 
 #################################
 # RISCV Toolchain
@@ -60,6 +60,7 @@ C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_uart.c
 endif
 ifeq ($(CHIP),bearlyml)
 C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_gpio.c
+C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_i2c.c
 C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_rcc.c
 C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_uart.c
 endif
@@ -106,7 +107,7 @@ ifeq ($(CHIP),tinyrocket)
 ARCH = rv32imac
 ABI = ilp32
 endif
-ifeq ($(CHIP),scumv)
+ifeq ($(CHIP),bearlyml)
 ARCH = rv64imac
 ABI = lp64
 endif

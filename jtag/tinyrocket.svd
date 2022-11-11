@@ -54,6 +54,36 @@
     </peripheral>
 
     <peripheral>
+      <name>RCC</name>
+      <description>Reset and Clock Control</description>
+      <groupName>RCC</groupName>
+      <baseAddress>0x00100000</baseAddress>
+      <addressBlock>
+        <offset>0x0</offset>
+        <size>0x400</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <register>
+          <name>TILE0_RESET</name>
+          <description>RocketTile 0 reset control</description>
+          <addressOffset>0x00</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>TILE0_RESET</name>
+              <description>RocketTile 0 reset control</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+
+    <peripheral>
       <name>CLINT</name>
       <description>Core-Local Interruptor</description>
       <groupName>CLINT</groupName>
@@ -122,29 +152,209 @@
     </peripheral>
 
     <peripheral>
-      <name>RCC</name>
-      <description>Reset and Clock Control</description>
-      <groupName>RCC</groupName>
-      <baseAddress>0x00100000</baseAddress>
+      <name>PLIC</name>
+      <description>Platform Level Interrupt Controller</description>
+      <groupName>PLIC</groupName>
+      <baseAddress>0x0C000000</baseAddress>
       <addressBlock>
         <offset>0x0</offset>
-        <size>0x400</size>
+        <size>0x00201000</size>
         <usage>registers</usage>
       </addressBlock>
       <registers>
         <register>
-          <name>TILE0_RESET</name>
-          <description>RocketTile 0 reset control</description>
+          <name>PRIO0</name>
+          <description>priority 0</description>
           <addressOffset>0x00</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>TILE0_RESET</name>
-              <description>RocketTile 0 reset control</description>
+              <name>PRIO0</name>
+              <description>source 0 priority</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PRIO1</name>
+          <description>priority 1</description>
+          <addressOffset>0x04</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>PRIO1</name>
+              <description>source 1 priority</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PRIO2</name>
+          <description>priority 2</description>
+          <addressOffset>0x08</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>PRIO2</name>
+              <description>source 2 priority</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PRIO3</name>
+          <description>priority 3</description>
+          <addressOffset>0x0C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>PRIO3</name>
+              <description>source 3 priority</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PRIO4</name>
+          <description>priority 4</description>
+          <addressOffset>0x08</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>PRIO4</name>
+              <description>source 4 priority</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PENDINGA</name>
+          <description>pending A</description>
+          <addressOffset>0x1000</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>PENDING0</name>
+              <description>source 0 pending status</description>
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
+              <enumeratedValues>
+                <name>PENDING0</name>
+                <usage>read-only</usage>
+                <enumeratedValue><name>Pending</name><description>Interrupt pending</description><value>1</value></enumeratedValue>
+                <enumeratedValue><name>Not pending</name><description>No interrupt pending</description><value>0</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>PENDING1</name>
+              <description>source 1 pending status</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues derivedFrom="PENDING0"/>
+            </field>
+            <field>
+              <name>PENDING2</name>
+              <description>source 2 pending status</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues derivedFrom="PENDING0"/>
+            </field>
+            <field>
+              <name>PENDING3</name>
+              <description>source 3 pending status</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues derivedFrom="PENDING0"/>
+            </field>
+            <field>
+              <name>PENDING4</name>
+              <description>source 4 pending status</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues derivedFrom="PENDING0"/>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ENABLEA</name>
+          <description>enable A</description>
+          <addressOffset>0x2000</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>EN0</name>
+              <description>source 0 enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues>
+                <name>EN0</name>
+                <usage>read-write</usage>
+                <enumeratedValue><name>Enabled</name><description>Interrupt enabled</description><value>1</value></enumeratedValue>
+                <enumeratedValue><name>Disabled</name><description>Interrupt disabled</description><value>0</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>EN1</name>
+              <description>source 1 enable</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues derivedFrom="EN0"/>
+            </field>
+            <field>
+              <name>EN2</name>
+              <description>source 2 enable</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues derivedFrom="EN0"/>
+            </field>
+            <field>
+              <name>EN3</name>
+              <description>source 3 enable</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues derivedFrom="EN0"/>
+            </field>
+            <field>
+              <name>EN4</name>
+              <description>source 4 enable</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues derivedFrom="EN0"/>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>THRESHOLD</name>
+          <description>threshold</description>
+          <addressOffset>0x200000</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>THRESHOLD</name>
+              <description>priority threshold</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>3</bitWidth>
             </field>
           </fields>
         </register>
@@ -283,6 +493,74 @@
               <description>Receive watermark level</description>
               <bitOffset>16</bitOffset>
               <bitWidth>3</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>IE</name>
+          <description>interrupt enable register</description>
+          <addressOffset>0x10</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>TXWM</name>
+              <description>Transmit watermark interrupt enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues>
+                <name>TXWM</name>
+                <usage>read-write</usage>
+                <enumeratedValue><name>Enabled</name><description>TX watermark interrupt enabled</description><value>1</value></enumeratedValue>
+                <enumeratedValue><name>Disabled</name><description>TX watermark interrupt disabled</description><value>0</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RXWM</name>
+              <description>Receive watermark interrupt enable</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues>
+                <name>RXWM</name>
+                <usage>read-write</usage>
+                <enumeratedValue><name>Enabled</name><description>RX watermark interrupt enabled</description><value>1</value></enumeratedValue>
+                <enumeratedValue><name>Disabled</name><description>RX watermark interrupt disabled</description><value>0</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>IP</name>
+          <description>interrupt pending register</description>
+          <addressOffset>0x10</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>TXWM</name>
+              <description>Transmit watermark interrupt pending</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues>
+                <name>TXWM</name>
+                <usage>read-only</usage>
+                <enumeratedValue><name>Pending</name><description>TX watermark interrupt pending</description><value>1</value></enumeratedValue>
+                <enumeratedValue><name>Not pending</name><description>TX watermark interrupt not pending</description><value>0</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RXWM</name>
+              <description>Receive watermark interrupt pending</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+              <enumeratedValues>
+                <name>RXWM</name>
+                <usage>read-only</usage>
+                <enumeratedValue><name>Pending</name><description>RX watermark interrupt pending</description><value>1</value></enumeratedValue>
+                <enumeratedValue><name>Not pending</name><description>RX watermark interrupt not pending</description><value>0</value></enumeratedValue>
+              </enumeratedValues>
             </field>
           </fields>
         </register>
