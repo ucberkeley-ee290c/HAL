@@ -191,16 +191,25 @@ typedef struct {
 #define BASEBAND                ((BASEBAND_TypeDef *)BASEBAND_BASE)
 
 
-#define UART_RXCTRL_RXEN_POS                    (0U)
-#define UART_RXCTRL_RXEN_MSK                    (0x1UL << UART_RXCTRL_RXEN_POS)
-#define UART_RXCTRL_RXCNT_POS                   (16U)
-#define UART_RXCTRL_RXCNT_MSK                   (0x7UL << UART_RXCTRL_RXCNT_POS)
+
+#define UART_TXDATA_DATA_POS                    (0U)
+#define UART_TXDATA_DATA_MSK                    (0xFFUL << UART_TXDATA_DATA_POS)
+#define UART_TXDATA_FULL_POS                    (31U)
+#define UART_TXDATA_FULL_MSK                    (0x1UL << UART_TXDATA_FULL_POS)
+#define UART_RXDATA_DATA_POS                    (0U)
+#define UART_RXDATA_DATA_MSK                    (0xFFUL << UART_RXDATA_DATA_POS)
+#define UART_RXDATA_EMPTY_POS                   (31U)
+#define UART_RXDATA_EMPTY_MSK                   (0x1UL << UART_RXDATA_EMPTY_POS)
 #define UART_TXCTRL_TXEN_POS                    (0U)
 #define UART_TXCTRL_TXEN_MSK                    (0x1UL << UART_TXCTRL_TXEN_POS)
 #define UART_TXCTRL_NSTOP_POS                   (1U)
 #define UART_TXCTRL_NSTOP_MSK                   (0x1UL << UART_TXCTRL_NSTOP_POS)
 #define UART_TXCTRL_TXCNT_POS                   (16U)
 #define UART_TXCTRL_TXCNT_MSK                   (0x7UL << UART_RXCTRL_RXCNT_POS)
+#define UART_RXCTRL_RXEN_POS                    (0U)
+#define UART_RXCTRL_RXEN_MSK                    (0x1UL << UART_RXCTRL_RXEN_POS)
+#define UART_RXCTRL_RXCNT_POS                   (16U)
+#define UART_RXCTRL_RXCNT_MSK                   (0x7UL << UART_RXCTRL_RXCNT_POS)
 
 
 #define MIE_USIE_POS                  0x00U
