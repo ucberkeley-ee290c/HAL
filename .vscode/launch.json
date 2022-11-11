@@ -20,7 +20,7 @@
             "runToEntryPoint": "main",
             "showDevDebugOutput": "none"
 
-            "svdFile": "${workspaceRoot}/jtag/tinyrocket.svd",
+            "svdFile": "${workspaceRoot}/jtag/tinyrocketx.svd",
 
             "numberOfProcessors": 5,
             "currentProcessor": 1
