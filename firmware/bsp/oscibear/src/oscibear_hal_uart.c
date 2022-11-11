@@ -21,7 +21,7 @@ uint8_t HAL_UART_getTXFIFODepth(UART_TypeDef *UARTx) {
 
 Status HAL_UART_receive(UART_TypeDef *UARTx, uint8_t *data, uint16_t size, uint32_t timeout) {
   while (size > 0) {
-    while (!HAL_UART_getRXFIFODepth(UARTx)) {
+    while (READ_BITS(UARTx->RXDATA, UART_RXDATA_EMPTY_MSK)) {
       // return TIMEOUT;
     }
     *data = UARTx->RXDATA;
