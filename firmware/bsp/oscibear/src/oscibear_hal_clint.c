@@ -3,7 +3,7 @@
 
 
 void HAL_CLINT_triggerSoftwareInterrupt(uint32_t hartid) {
-  SET_BITS(CLINT->MSIP, 1U << (hartid));
+  SET_BITS(CLINT->MSIP0, 1U << (hartid));
 }
 
 uint64_t HAL_CLINT_getTime() {
@@ -19,7 +19,7 @@ uint64_t HAL_CLINT_getTime() {
 }
 
 void HAL_CLINT_setTimerInterrupt(uint64_t time) {
-  *((uint32_t *)(&CLINT->MTIMECMP) + 1) = 0xffffffff;
-	*((uint32_t *)(&CLINT->MTIMECMP)) = (uint32_t)time;
-	*((uint32_t *)(&CLINT->MTIMECMP) + 1) = (uint32_t)(time >> 32);
+  *((uint32_t *)(&CLINT->MTIMECMP0) + 1) = 0xffffffff;
+	*((uint32_t *)(&CLINT->MTIMECMP0)) = (uint32_t)time;
+	*((uint32_t *)(&CLINT->MTIMECMP0) + 1) = (uint32_t)(time >> 32);
 }

@@ -51,7 +51,7 @@ void HAL_UART_enableTXInterrupt(UART_TypeDef *UARTx, uint16_t fifo_level) {
 
 Status HAL_UART_receive(UART_TypeDef *UARTx, uint8_t *data, uint16_t size, uint32_t timeout) {
   while (size > 0) {
-    while (!HAL_UART_getRXFIFODepth(UARTx)) {
+    while (READ_BITS(UARTx->RXDATA, UART_RXDATA_EMPTY_MSK)) {
       // return TIMEOUT;
     }
     *data = UARTx->RXDATA;
