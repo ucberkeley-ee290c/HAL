@@ -42,6 +42,7 @@ A_SOURCES  = $(wildcard $(SRC_DIR)*.S) $(wildcard $(SRC_DIR)*/*.S)
 
 C_SOURCES  = $(wildcard $(SRC_DIR)*.c) $(wildcard $(SRC_DIR)*/*.c)
 
+A_SOURCES += $(VENDOR_ROOT)$(CHIP)/startup/$(CHIP)_bootrom.S
 A_SOURCES += $(VENDOR_ROOT)$(CHIP)/startup/$(CHIP)_startup.S
 
 # common drivers for all RV cores
