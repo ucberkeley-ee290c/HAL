@@ -11,8 +11,17 @@ extern "C" {
 
 #define UART_FIFO_DEPTH   8
 
+#define UART_MODE_RX                    0x01U
+#define UART_MODE_TX                    0x02U
+#define UART_MODE_TX_RX                 0x03U
+
+#define UART_STOPBITS_1                 0
+#define UART_STOPBITS_2                 UART_TXCTRL_NSTOP_MSK
+
 typedef struct {
-  uint32_t baudrate;
+  uint32_t baudrate;  // the default baudrate divisor is 0xAD, 173
+  uint32_t mode;
+  uint32_t stopbits;
 } UART_InitTypeDef;
 
 // the default baudrate divisor is 0xAD, 173

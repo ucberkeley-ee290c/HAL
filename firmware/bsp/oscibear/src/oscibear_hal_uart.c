@@ -2,13 +2,23 @@
 #include "oscibear_hal_uart.h"
 
 void HAL_UART_init(UART_TypeDef *UARTx, UART_InitTypeDef *UART_init) {
-  SET_BITS(UARTx->RXCTRL, UART_RXCTRL_RXEN_MSK);
-  SET_BITS(UARTx->TXCTRL, UART_TXCTRL_TXEN_MSK);
+  CLEAR_BITS(UARTx->RXCTRL, UART_RXCTRL_RXEN_MSK);
+  CLEAR_BITS(UARTx->TXCTRL, UART_TXCTRL_TXEN_MSK);
 
-  UARTx->DIV = (SYS_CLK_FREQ / UART_init->baudrate) - 1;
+  if (READ_BITS(UART_init->mode, 0b01)) {
+    SET_BITS(UARTx->RXCTRL, UART_RXCTRL_RXEN_MSK);
+  }
+  
+  if (READ_BITS(UART_init->mode, 0b10)) {
+    SET_BITS(UARTx->TXCTRL, UART_TXCTRL_TXEN_MSK);
+  }
 
+  CLEAR_BITS(UARTx->TXCTRL, UART_TXCTRL_NSTOP_MSK);
+  CLEAR_BITS(UARTx->TXCTRL, UART_init->stopbits);
+  
   // baudrate setting
   // f_baud = f_sys / (div + 1)
+  UARTx->DIV = (SYS_CLK_FREQ / UART_init->baudrate) - 1;
 }
 
 uint8_t HAL_UART_getRXFIFODepth(UART_TypeDef *UARTx) {

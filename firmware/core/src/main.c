@@ -14,11 +14,11 @@ int main() {
 
   HAL_UART_init(UART0, &UART_init_config);
 
-  I2C_InitTypeDef I2C_init_config;
-  HAL_I2C_init(I2C0, &I2C_init_config);
+  // I2C_InitTypeDef I2C_init_config;
+  // HAL_I2C_init(I2C0, &I2C_init_config);
   
-  uint8_t config = 0;
-  HAL_I2C_writeMemory(I2C0, DEFAULT_ADDRESS, 0x06, &config, 1, 0);
+  // uint8_t config = 0;
+  // HAL_I2C_writeMemory(I2C0, DEFAULT_ADDRESS, 0x06, &config, 1, 0);
   while (1) {
 
     // // I2C Test -- qwiic button
@@ -40,7 +40,7 @@ int main() {
     // HAL_I2C_readMemory(I2C0, DEFAULT_ADDRESS, 0x00, &buffer, 1, 0);
 
     uint8_t buffer[6];
-    HAL_I2C_readMemory(I2C0, DEFAULT_ADDRESS, 0x2D, &buffer, 6, 0);
+    // HAL_I2C_readMemory(I2C0, DEFAULT_ADDRESS, 0x2D, &buffer, 6, 0);
     uint16_t accel_x = (buffer[0] << 8) | buffer[1];
     uint16_t accel_y = (buffer[2] << 8) | buffer[3];
     uint16_t accel_z = (buffer[4] << 8) | buffer[5];

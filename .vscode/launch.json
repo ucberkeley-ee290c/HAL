@@ -14,7 +14,8 @@
             "serverpath": "openocd",
             "toolchainPrefix": "riscv64-unknown-elf",
             "configFiles": [
-                "${workspaceRoot}/jtag/bearlyarty.cfg"
+                // "${workspaceRoot}/jtag/bearlyarty.cfg"
+                "${workspaceRoot}/jtag/osciarty.cfg"
             ],
             "searchDir": [],
             "runToEntryPoint": "main",
