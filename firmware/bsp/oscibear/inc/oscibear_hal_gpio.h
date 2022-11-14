@@ -61,7 +61,7 @@ typedef struct {
  * 
  * @param GPIOx     GPIO instance
  * @param GPIO_init pointer to a GPIO_InitTypeDef structure that contains
- *        the configuration information for the specified GPIO peripheral.
+ *                  the configuration information for the specified GPIO peripheral.
  * @param pin       the pin to configure.
  *                  This parameter can be any combination of GPIO_PIN_x where x can be (0..31).
  */
