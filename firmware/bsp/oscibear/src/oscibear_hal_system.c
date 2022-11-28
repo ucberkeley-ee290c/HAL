@@ -142,7 +142,7 @@ void SupervisorSoftware_IRQn_Handler() {}
 void HypervisorSoftware_IRQn_Handler() {}
 void MachineSoftware_IRQn_Handler() {
   HAL_MachineSoftwareInterruptCallback(0);
-  CLINT->MSIP = 0;
+  CLINT->MSIP0 = 0;
   HAL_CORE_clearIRQ(MachineSoftware_IRQn);
 }
 

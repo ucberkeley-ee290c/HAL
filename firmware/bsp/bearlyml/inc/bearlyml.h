@@ -252,6 +252,8 @@ typedef struct {
 #define UART_RXCTRL_RXEN_MSK                    (0x1UL << UART_RXCTRL_RXEN_POS)
 #define UART_RXCTRL_RXCNT_POS                   (16U)
 #define UART_RXCTRL_RXCNT_MSK                   (0x7UL << UART_RXCTRL_RXCNT_POS)
+<<<<<<< HEAD
+=======
 #define UART_IE_TXWM_POS                        (0U)
 #define UART_IE_TXWM_MSK                        (0x1UL << UART_IE_TXWM_POS)
 #define UART_IE_RXWM_POS                        (1U)
@@ -262,6 +264,7 @@ typedef struct {
 #define UART_IP_RXWM_MSK                        (0x1UL << UART_IP_RXWM_POS)
 #define UART_DIV_DIV_POS                        (0U)
 #define UART_DIV_DIV_MSK                        (0xFFUL << UART_DIV_DIV_POS)
+>>>>>>> c0bcd3dc19fc3e621668324dc615e25fbbcbf4b0
 
 #define I2C_CTRL_IEN_POS                        0x06U
 #define I2C_CTRL_IEN_MSK                        (1U << I2C_CTRL_IEN_POS)

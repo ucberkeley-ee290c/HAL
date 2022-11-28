@@ -27,8 +27,8 @@ void HAL_GPIO_init(GPIO_TypeDef *GPIOx, GPIO_InitTypeDef *GPIO_init, GPIO_PIN pi
   }  
 }
 
-uint8_t HAL_GPIO_readPin(GPIO_TypeDef *GPIOx, GPIO_PIN pin) {
-  return READ_BITS(GPIOx->INPUT_VAL, (uint32_t)pin) ? 1 : 0;
+State HAL_GPIO_readPin(GPIO_TypeDef *GPIOx, GPIO_PIN pin) {
+  return READ_BITS(GPIOx->INPUT_VAL, (uint32_t)pin) ? SET : RESET;
 }
 
 void HAL_GPIO_writePin(GPIO_TypeDef *GPIOx, GPIO_PIN pin, uint8_t value) {
