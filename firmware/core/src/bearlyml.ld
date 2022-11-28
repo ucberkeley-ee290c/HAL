@@ -56,50 +56,50 @@ SECTIONS {
     _sdata = .;        /* create a global symbol at data start */
     *(.data .data*)
     _edata = .;        /* define a global symbol at data end */
-  }> FLASH
+  }> SRAM
 
   .sdata : {
     __global_pointer$ = . + 0x800;
     *(.sdata .sdata.*)
     *(.gnu.linkonce.s.*)
-  }> FLASH
+  }> SRAM
 
   /* thread-local data segment */
   .tdata : {
     _tdata_begin = .;
     *(.tdata)
     _tdata_end = .;
-  }> FLASH
+  }> SRAM
   
   /* bss segment */
   .sbss (NOLOAD) : {
     _sbss = .;
     *(.sbss .sbss.* .gnu.linkonce.sb.*)
     *(.scommon)
-  }> FLASH
+  }> SRAM
 
   .bss (NOLOAD) : {
     *(.bss)
     *(COMMON)
-  }> FLASH
+  }> SRAM
   
   .tbss : {
     *(.tbss)
     _ebss = .;
-  }> FLASH
+  }> SRAM
 
   .heap (NOLOAD) : ALIGN(8) {
     PROVIDE(__end = .);
     PROVIDE(__heap_start = .);
     . += __heap_size;
     PROVIDE(__heap_end = .);
-  }> FLASH
+  }> SRAM
 
   .stack (NOLOAD) : ALIGN(16) {
     PROVIDE(__stack_start = .);
     . += __stack_size; /* Hart 0 */
     PROVIDE(__stack_end = .);
     PROVIDE(_sp = __stack_end);
-  }> FLASH
+  }> SRAM
 
 }

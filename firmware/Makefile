@@ -1,8 +1,8 @@
 
 TARGET ?= firmware
 
-CHIP ?= oscibear
-# CHIP ?= bearlyml
+# CHIP ?= oscibear
+CHIP ?= bearlyml
 # CHIP ?= tinyrocket
 
 #################################
