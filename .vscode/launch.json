@@ -14,13 +14,13 @@
             "serverpath": "openocd",
             "toolchainPrefix": "riscv64-unknown-elf",
             "configFiles": [
-                "${workspaceRoot}/jtag/bearlyarty.cfg"
+                "${workspaceRoot}/jtag/tinyrocket.cfg"
             ],
             "searchDir": [],
             "runToEntryPoint": "main",
             "showDevDebugOutput": "none"
 
-            "svdFile": "${workspaceRoot}/jtag/bearlyarty.svd",
+            "svdFile": "${workspaceRoot}/jtag/bearlyml.svd",
 
             "numberOfProcessors": 5,
             "currentProcessor": 1
