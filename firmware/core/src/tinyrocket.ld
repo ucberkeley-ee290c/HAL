@@ -5,6 +5,7 @@ OUTPUT_ARCH("riscv")
 ENTRY(_start)
 
 MEMORY {
+  BOOTROM (rx): ORIGIN = 0x00010000, LENGTH = 1K
   SRAM (rwx): ORIGIN = 0x80000000, LENGTH = 16K
 }
 
@@ -17,6 +18,12 @@ SECTIONS {
   
   PROVIDE(__boot_hart = 0);
 
+  .bootrom (NOLOAD) : {
+    *(.bootrom.start)
+    *(.bootrom.hang)
+    *(.bootrom.hang80)
+  }> BOOTROM
+  
   .text : {
     . = ALIGN(4);
     KEEP(*(.text.reset))          /* Reset routine */
