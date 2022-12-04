@@ -2,8 +2,8 @@
 TARGET ?= firmware
 
 # CHIP ?= oscibear
-# CHIP ?= bearlyml
-CHIP ?= tinyrocket
+CHIP ?= bearlyml
+# CHIP ?= tinyrocket
 
 #################################
 # RISCV Toolchain
