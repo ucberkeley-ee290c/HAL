@@ -23,6 +23,33 @@
 #define READ_BITS(REG, BIT)                   ((REG) & (BIT))
 #define WRITE_BITS(REG, CLEARMASK, SETMASK)   ((REG) = (((REG) & (~(CLEARMASK))) | (SETMASK)))
 
+#define READ_CSR(REG) ({                          \
+  unsigned long __tmp;                            \
+  asm volatile ("csrr %0, " #REG : "=r"(__tmp));  \
+  __tmp; })
+
+#define WRITE_CSR(REG, VAL) ({                    \
+  asm volatile ("csrw " #REG ", %0" :: "rK"(VAL)); })
+
+#define SWAP_CSR(REG, VAL) ({                     \
+  unsigned long __tmp;                            \
+  asm volatile ("csrrw %0, " #REG ", %1" : "=r"(__tmp) : "rK"(VAL)); \
+  __tmp; })
+
+#define SET_CSR_BITS(REG, BIT) ({                 \
+  unsigned long __tmp;                            \
+  asm volatile ("csrrs %0, " #REG ", %1" : "=r"(__tmp) : "rK"(BIT)); \
+  __tmp; })
+
+#define CLEAR_CSR_BITS(REG, BIT) ({               \
+  unsigned long __tmp;                            \
+  asm volatile ("csrrc %0, " #REG ", %1" : "=r"(__tmp) : "rK"(BIT)); \
+  __tmp; })
+
+#define rdtime() read_csr(time)
+#define rdcycle() read_csr(cycle)
+#define rdinstret() read_csr(instret)
+
 typedef enum {
   RESET = 0UL,
   SET   = !RESET,

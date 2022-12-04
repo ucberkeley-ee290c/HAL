@@ -1,26 +1,25 @@
 #include "encoding.h"
-/*
-# if __riscv_xlen == 64
-#   define LREG ld
-#   define SREG sd
-#   define REGBYTES 8
-# else
-*/
+
+//#if __riscv_xlen == 64
+  #define LREG ld
+  #define SREG sd
+  #define REGBYTES 8
+/*#else
   #define LREG lw
   #define SREG sw
   #define REGBYTES 4
-  /*
 #endif
 */
 
 /* start address for the .data section. defined in linker script */  
-.word  _sdata
+.word  _data_source_start
 /* end address for the .data section. defined in linker script */
-.word  _edata
+.word  _data_target_start
+.word  _data_target_end
 /* start address for the .bss section. defined in linker script */
-.word  _sbss
+.word  _bss_start
 /* end address for the .bss section. defined in linker script */
-.word  _ebss
+.word  _bss_end
 
 .align 4
 .section .text.reset
@@ -141,33 +140,69 @@ _start:
   la t0, isr_routine
   csrw mtvec, t0
 
+  # start set up C runtime
+
   # set up global pointer
 .option push
 .option norelax
   la gp, __global_pointer$
 .option pop
 
+  # only the boot hart need to execute section initialization
+  csrr a0, mhartid
+  li a1, 1
+
+  li t0, 0    # hart 0 is the boot hart
+  bne a0, t0, bss_init_exit
+
+data_init_entry:
+  la t0, _data_source_start
+  la t1, _data_target_start
+  la t2, _data_target_end
+
+  # see if:
+  # - data section is already at correct location?
+  # - data section is of size 0?
+  beq t0, t1, data_init_exit
+  bge t1, t2, data_init_exit
+
+data_init_loop:
+#if __riscv_xlen == 32
+  lw   t3, 0(t0)
+  sw   t3, 0(t1)
+  addi t0, t0, 4
+  addi t1, t1, 4
+  blt  t1, t2, data_init_loop
+#else
+  ld   t3, 0(t0)
+  sd   t3, 0(t1)
+  addi t0, t0, 8
+  addi t1, t1, 8
+  blt  t1, t2, data_init_loop
+#endif
+data_init_exit:
+
+
+bss_init_entry:
 /* Zero fill the bss segment. */
-  la t0, _sbss
-  la t1, _ebss
+  la t0, _bss_start
+  la t1, _bss_end
+
+  # see if bss section is of size 0?
+  beq t0, t1, bss_init_exit
   j bss_init_loop
 
-bss_fill:
+bss_init_loop:
   lw zero, 0(t0)
   addi t0, t0, 4
+  blt t0, t1, bss_init_loop
 
-bss_init_loop:
-  bge t0, t1, bss_init_end
-  j bss_fill
+bss_init_exit:
 
-bss_init_end:
+
   # set up stack pointers
   la sp, _sp
   la tp, _sp
-
-  # set up c runtime
-  csrr a0, mhartid
-  li a1, 1
 
   call system_init
   call main

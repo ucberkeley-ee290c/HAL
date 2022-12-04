@@ -1,53 +1,94 @@
 
 #include "main.h"
 
-char str[64];
 
-#define DEFAULT_ADDRESS   0x69
-// #define DEFAULT_ADDRESS   0x6F
+#include <inttypes.h>
+#include <stdio.h>
+#define STR1(x) #x
+#ifndef STR
+#define STR(x) STR1(x)
+#endif
+
+#define CAT_(A, B) A##B
+#define CAT(A, B) CAT_(A, B)
+
+#define ROCC_INSTRUCTION_R_R_R(x, rd, rs1, rs2, func7)                               \
+  {                                                                                  \
+    asm volatile(                                                                    \
+        ".insn r " STR(CAT(CUSTOM_, x)) ", " STR(0x7) ", " STR(func7) ", %0, %1, %2" \
+        : "=r"(rd)                                                                   \
+        : "r"(rs1), "r"(rs2));                                                       \
+  }
+
+
+#define ROCC_INSTRUCTION_0_R_R(x, rs1, rs2, func7)                                   \
+  {                                                                                  \
+    asm volatile(                                                                    \
+        ".insn r " STR(CAT(CUSTOM_, x)) ", " STR(0x3) ", " STR(func7) ", x0, %0, %1" \
+        :                                                                            \
+        : "r"(rs1), "r"(rs2));                                                       \
+  }
+
+
+
+char str[64];
 
 int main() {
   UART_InitTypeDef UART_init_config;
   UART_init_config.baudrate = 115200;
   UART_init_config.mode = UART_MODE_TX_RX;
   UART_init_config.stopbits = UART_STOPBITS_1;
-
   HAL_UART_init(UART0, &UART_init_config);
 
-  // I2C_InitTypeDef I2C_init_config;
-  // HAL_I2C_init(I2C0, &I2C_init_config);
-  
-  // uint8_t config = 0;
-  // HAL_I2C_writeMemory(I2C0, DEFAULT_ADDRESS, 0x06, &config, 1, 0);
+  uint8_t sparse_row[] = {1,1, 2,3, 3,4, 2,6, 1,7, 5,10, 2,11, 1,12};
+  uint8_t sparse_row_size = 8;
+  uint8_t dense_matrix[] = {1,1,1,1,1,1,1,1,
+                        2,2,2,2,2,2,2,2,
+                        3,3,3,3,3,3,3,3,
+                        4,4,4,4,4,4,4,4,
+                        5,5,5,5,5,5,5,5,
+                        6,6,6,6,6,6,6,6,
+                        7,7,7,7,7,7,7,7,
+                        8,8,8,8,8,8,8,8,
+                        9,9,9,9,9,9,9,9,
+                        10,10,10,10,10,10,10,10,
+                        11,11,11,11,11,11,11,11,
+                        12,12,12,12,12,12,12,12,
+                        13,13,13,13,13,13,13,13};
+  uint8_t dense_matrix_size = 1;
+
+  uint8_t output_buf[800];
+
+
   while (1) {
-
-    // // I2C Test -- qwiic button
-    // uint8_t rx_buffer;
-    // HAL_I2C_masterReceive(I2C0, DEFAULT_ADDRESS, &rx_buffer, 1, 0);
-    // uint8_t tx_buffer = 100;
-    // HAL_I2C_writeMemory(I2C0, DEFAULT_ADDRESS, 0x19, &tx_buffer, 1, 0);
-    // HAL_I2C_writeMemory(I2C0, DEFAULT_ADDRESS, 0x19, &tx_buffer, 1, 0);
-    // tx_buffer = 0x00;
-    // HAL_I2C_masterTransmit(I2C0, DEFAULT_ADDRESS, &tx_buffer, 1, 0);
-
-    // HAL_delay(1000);
-    // tx_buffer = 0;
-    // HAL_I2C_writeMemory(I2C0, DEFAULT_ADDRESS, 0x19, &tx_buffer, 1, 0);
-
-    // I2C Test -- qwiic IMU
-    
-    // uint8_t buffer;
-    // HAL_I2C_readMemory(I2C0, DEFAULT_ADDRESS, 0x00, &buffer, 1, 0);
-
-    uint8_t buffer[6];
-    // HAL_I2C_readMemory(I2C0, DEFAULT_ADDRESS, 0x2D, &buffer, 6, 0);
-    uint16_t accel_x = (buffer[0] << 8) | buffer[1];
-    uint16_t accel_y = (buffer[2] << 8) | buffer[3];
-    uint16_t accel_z = (buffer[4] << 8) | buffer[5];
-
-    sprintf(str, "acc x: %d\ty: %d\tz: %d\n", accel_x, accel_y, accel_z);
+    sprintf(str, "load output buf\n");
     HAL_UART_transmit(UART0, (uint8_t *)str, strlen(str), 0);
 
-    HAL_delay(50);
+    ROCC_INSTRUCTION_0_R_R(0, output_buf, 0, 2);
+
+    sprintf(str, "load dense mat\n");
+    HAL_UART_transmit(UART0, (uint8_t *)str, strlen(str), 0);
+    
+    ROCC_INSTRUCTION_0_R_R(0, dense_matrix, dense_matrix_size, 1);
+
+    sprintf(str, "load sparse row\n");
+    HAL_UART_transmit(UART0, (uint8_t *)str, strlen(str), 0);
+    
+    ROCC_INSTRUCTION_0_R_R(0, sparse_row, sparse_row_size, 0);
+
+    
+    
+    sprintf(str, "fence\n");
+    HAL_UART_transmit(UART0, (uint8_t *)str, strlen(str), 0);
+
+    asm volatile("fence");
+
+    if (output_buf[0] == 139) 
+      sprintf(str, "test pass: %d\n", output_buf[0]);
+    else 
+      sprintf(str, "test fail\n");
+
+    HAL_UART_transmit(UART0, (uint8_t *)str, strlen(str), 0);
+    HAL_delay(100);
   }
 }

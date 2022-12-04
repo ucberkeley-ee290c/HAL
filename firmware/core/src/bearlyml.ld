@@ -35,8 +35,11 @@ SECTIONS {
     KEEP (*(.fini))
     
     *(.gnu.linkonce.t.*)
-    _etext = .;                   /* define a global symbols at end of code */
   }> FLASH
+
+  PROVIDE(_text_target_start = ADDR(.data));
+  PROVIDE(_text_target_end = ADDR(.tdata) + SIZEOF(.tdata));
+  
   
   .rodata : {
     . = ALIGN(4);
@@ -53,53 +56,57 @@ SECTIONS {
   /* data segment */
   .data : {
     . = ALIGN(8);
-    _sdata = .;        /* create a global symbol at data start */
     *(.data .data*)
-    _edata = .;        /* define a global symbol at data end */
-  }> SRAM
+  }> SRAM AT> FLASH
 
   .sdata : {
     __global_pointer$ = . + 0x800;
     *(.sdata .sdata.*)
     *(.gnu.linkonce.s.*)
-  }> SRAM
+  }> SRAM AT> FLASH
 
   /* thread-local data segment */
   .tdata : {
     _tdata_begin = .;
     *(.tdata)
     _tdata_end = .;
-  }> SRAM
+  }> SRAM AT> FLASH
+
+  PROVIDE(_data_source_start = LOADADDR(.data));
+  PROVIDE(_data_target_start = ADDR(.data));
+  PROVIDE(_data_target_end = ADDR(.tdata) + SIZEOF(.tdata));
   
   /* bss segment */
-  .sbss (NOLOAD) : {
-    _sbss = .;
-    *(.sbss .sbss.* .gnu.linkonce.sb.*)
-    *(.scommon)
-  }> SRAM
-
   .bss (NOLOAD) : {
     *(.bss)
     *(COMMON)
   }> SRAM
-  
-  .tbss : {
-    *(.tbss)
-    _ebss = .;
+
+  .sbss (NOLOAD) : {
+    *(.sbss .sbss.* .gnu.linkonce.sb.*)
+    *(.scommon)
   }> SRAM
+  
+  .tbss (NOLOAD): {
+    *(.tbss)
+  }> SRAM
+  
+  PROVIDE(_bss_start = ADDR(.bss));
+  PROVIDE(_bss_end = ADDR(.tbss) + SIZEOF(.tbss));
 
   .heap (NOLOAD) : ALIGN(8) {
     PROVIDE(__end = .);
-    PROVIDE(__heap_start = .);
     . += __heap_size;
-    PROVIDE(__heap_end = .);
   }> SRAM
 
+  PROVIDE(_heap_start = ADDR(.heap));
+  PROVIDE(_heap_end = ADDR(.heap) + SIZEOF(.heap));
+  
   .stack (NOLOAD) : ALIGN(16) {
-    PROVIDE(__stack_start = .);
     . += __stack_size; /* Hart 0 */
-    PROVIDE(__stack_end = .);
-    PROVIDE(_sp = __stack_end);
+    PROVIDE(_sp = .);
   }> SRAM
 
+  PROVIDE(_stack_start = ADDR(.heap));
+  PROVIDE(_stack_end = ADDR(.heap) + SIZEOF(.heap));
 }

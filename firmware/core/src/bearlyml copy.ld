@@ -5,8 +5,11 @@ OUTPUT_ARCH("riscv")
 ENTRY(_start)
 
 MEMORY {
-  BOOTROM (rx): ORIGIN = 0x00010000, LENGTH = 1K
-  SRAM (rwx): ORIGIN = 0x80000000, LENGTH = 16K
+  LIBIFROM (rwx): ORIGIN = 0x00020000, LENGTH = 64K
+  LIBIFRAM (rwx): ORIGIN = 0x00030000, LENGTH = 64K
+  SRAM (rwx):     ORIGIN = 0x08000000, LENGTH = 16K
+  FLASH (rwx):    ORIGIN = 0x20000000, LENGTH = 128M
+  DRAM (rwx):     ORIGIN = 0x80000000, LENGTH = 16384M
 }
 
 SECTIONS {
@@ -18,12 +21,6 @@ SECTIONS {
   
   PROVIDE(__boot_hart = 0);
 
-  .bootrom (NOLOAD) : {
-    *(.bootrom.start)
-    *(.bootrom.hang)
-    *(.bootrom.hang80)
-  }> BOOTROM
-  
   .text : {
     . = ALIGN(4);
     KEEP(*(.text.reset))          /* Reset routine */
@@ -39,7 +36,7 @@ SECTIONS {
     
     *(.gnu.linkonce.t.*)
     _etext = .;                   /* define a global symbols at end of code */
-  }> SRAM
+  }> FLASH
   
   .rodata : {
     . = ALIGN(4);
@@ -51,7 +48,7 @@ SECTIONS {
     *(.srodata.cst4)
     *(.srodata.cst2)
     *(.srodata .srodata.*)
-  }> SRAM
+  }> FLASH
 
   /* data segment */
   .data : {

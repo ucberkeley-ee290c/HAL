@@ -113,6 +113,10 @@ void HypervisorSoftware_IRQn_Handler() {}
 void MachineSoftware_IRQn_Handler() {
   HAL_MachineSoftwareInterruptCallback(0);
   CLINT->MSIP0 = 0;
+  CLINT->MSIP1 = 0;
+  CLINT->MSIP2 = 0;
+  CLINT->MSIP3 = 0;
+  CLINT->MSIP4 = 0;
   HAL_CORE_clearIRQ(MachineSoftware_IRQn);
 }
 
@@ -154,11 +158,6 @@ void MachineExternal_IRQn_Handler() {
 void system_init(void) {
   // TODO: these should really go into main(), but putting here temporarily for ease of testing
   HAL_init();
-
-  UART_InitTypeDef UART_init_config;
-  UART_init_config.baudrate = 115200;
-
-  HAL_UART_init(UART0, &UART_init_config);
   
   return;
 }
