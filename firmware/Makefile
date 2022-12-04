@@ -52,20 +52,20 @@ C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_core.c
 C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_clint.c
 C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_plic.c
 
-ifeq ($(CHIP),oscibear)
+ifeq ($(CHIP), oscibear)
 C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_aes.c
 C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_baseband.c
 C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_gpio.c
 C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_rcc.c
 C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_uart.c
 endif
-ifeq ($(CHIP),bearlyml)
+ifeq ($(CHIP), bearlyml)
 C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_gpio.c
 C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_i2c.c
 C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_rcc.c
 C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_uart.c
 endif
-ifeq ($(CHIP),tinyrocket)
+ifeq ($(CHIP), tinyrocket)
 C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_uart.c
 endif
 
