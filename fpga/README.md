@@ -1,5 +1,19 @@
 # FPGA Prototyping
 
+Currently supported boards:
+
+[Diligent Arty Artix-7 35-T Development Board](https://digilent.com/shop/arty-a7-artix-7-fpga-development-board/?utm_source=google&utm_medium=cpc&utm_campaign=18640327811&utm_content=141995398465&utm_term=arty%20fpga&gclid=CjwKCAiA-dCcBhBQEiwAeWidtb5WqGx8h-ij7-UbXwRscDQpmdEGXkrTgn7w1gvMkeVnVyAyvvrOZRoC-jUQAvD_BwE)
+
+[Diligent Arty Artix-7 100-T Development Board](https://digilent.com/shop/arty-a7-artix-7-fpga-development-board/?utm_source=google&utm_medium=cpc&utm_campaign=18640327811&utm_content=141995398465&utm_term=arty%20fpga&gclid=CjwKCAiA-dCcBhBQEiwAeWidtb5WqGx8h-ij7-UbXwRscDQpmdEGXkrTgn7w1gvMkeVnVyAyvvrOZRoC-jUQAvD_BwE)
+
+[Diligent Cmod 35-T Breadboardable Module](https://digilent.com/shop/cmod-a7-35t-breadboardable-artix-7-fpga-module/)
+
+Planning to support:
+
+[Terasic MAX 10 Plus](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=218&No=1223&PartNo=1#contents)
+
+[Terasic DE-10 Standard Development Board](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=165&No=1081&PartNo=1#contents)
+
 ## Bitsteam Catalog
 
 ### OsciArty
