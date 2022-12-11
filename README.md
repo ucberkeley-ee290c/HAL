@@ -1,8 +1,12 @@
 # HAL
 
-[FPGA flow](https://github.com/ucberkeley-ee290c/HAL/blob/main/fpga/README.md)
+## Tutorials
 
-[software flow](https://github.com/ucberkeley-ee290c/HAL/blob/main/firmware/README.md)
+[Software Develop Environment Installation Tutorial](https://github.com/ucberkeley-ee290c/HAL/blob/main/firmware/README.md)
+
+[FPGA Tutorial](https://github.com/ucberkeley-ee290c/HAL/blob/main/fpga/README.md)
+
+## Directory Structure
 
 `/firmware` stores the HAL code for all supported chips.
 

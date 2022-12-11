@@ -67,9 +67,7 @@ SECTIONS {
 
   /* thread-local data segment */
   .tdata : {
-    _tdata_begin = .;
     *(.tdata)
-    _tdata_end = .;
   }> SRAM AT> FLASH
 
   PROVIDE(_data_source_start = LOADADDR(.data));

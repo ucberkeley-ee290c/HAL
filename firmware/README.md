@@ -1,27 +1,39 @@
 
+# Firmware
 
+## Installation
 
-## 1. Environment Setup
+### 1. Install RISC-V Toolchain
 
-### 1.1 Install RISCV Toolchain
+#### 1.1 Toolchain Options
 
-Either SiFive toolchain or the riscv-collab toolchain works:
+Either the riscv-collab or the SiFive toolchain works.
 
-#### 1.1.a Install SiFive Toolchain
+_Note: the SiFive toolchain only works on WSL (Windows Subsystem Linux), Linux and Mac OS (Mac to be confirmed)_
 
-_Note: this toolchain only works on Linux and Mac OS (Mac to be confirmed)_
+#### 1.1.a Install riscv-collab/riscv-gnu-toolchain Toolchain
 
-1. Download **GNU Embedded Toolchain — v2020.12.8** from SiFive's [website](https://www.sifive.com/software)
+Follow the RISC-V GNU Compiler Toolchain [README](https://github.com/riscv-collab/riscv-gnu-toolchain#risc-v-gnu-compiler-toolchain).
 
-2. Extract the downloaded file to a known location, for example, `/home/tk/Documents/RISCV/riscv64-unknown-elf-toolchain-10.2.0-2020.12.8-x86_64-linux-ubuntu14/`
+#### 1.1.b Install SiFive Toolchain
 
-3. Add the `bin` folder inside the file location to PATH by 
+Download **GNU Embedded Toolchain — v2020.12.8** from SiFive's [website](https://www.sifive.com/software)
+
+Extract the downloaded file to a known location, e.g.:
+
+```bash
+/home/tk/Documents/RISCV/riscv64-unknown-elf-toolchain-10.2.0-2020.12.8-x86_64-linux-ubuntu14/
+```
+
+#### 1.2 Configure PATH setting
+
+Add the `bin` folder inside the file location to PATH:
 
 ```bash
 $ export PATH="/home/tk/Documents/RISCV/riscv64-unknown-elf-toolchain-10.2.0-2020.12.8-x86_64-linux-ubuntu14/bin:$PATH" 
 ```
 
-4. Now we should able to invoke gcc by the following command
+Now we should able to invoke gcc by the following command
 
 ```bash
 $ riscv64-unknown-elf-gcc
@@ -29,11 +41,11 @@ riscv64-unknown-elf-gcc: fatal error: no input files
 compilation terminated.   
 ```
 
-#### 1.1.b Install riscv-collab/riscv-gnu-toolchain Toolchain
+### 2. Install Chipyard
 
-TODO: write this
+Follow [Setting up the Chipyard](https://chipyard.readthedocs.io/en/stable/Chipyard-Basics/Initial-Repo-Setup.html#setting-up-the-chipyard-repo) tutorial from Chipyard documentation.
 
-### 1.2 Clone this repo
+### 3 Clone this repo
 
 Clone this repo by running
 
@@ -42,7 +54,9 @@ $ git clone git@github.com:ucberkeley-ee290c/HAL.git
 $ cd HAL
 ```
 
-## 2. Edit Makefile
+## Usage
+
+### 1. Configure toolchain and chip setting
 
 Open `firmware/Makefile`, under the "RISCV Toolchain" section, uncomment the prefix of the toolchain you are using.
 
@@ -51,18 +65,23 @@ Open `firmware/Makefile`, under the "RISCV Toolchain" section, uncomment the pre
 # RISCV Toolchain
 #################################
 
-# SiFive Toolchain
+# SiFive / RISC-V Collab Toolchain
 PREFIX = riscv64-unknown-elf-
-
-# Nuclei Toolchain
-# PREFIX = riscv-nuclei-elf-
 
 # xPack Toolchain
 # when using this, MCU arch should be `ARCH = rv32imafc_zicsr`
 # PREFIX = riscv-none-elf-
 ```
 
-## 3. Compile
+Set the target chip by uncommenting the corresponding chip name.
+
+```Makefile
+# CHIP ?= oscibear
+CHIP ?= bearlyml
+# CHIP ?= tinyrocket
+```
+
+### 2. Compile
 
 ```bash
 $ cd firmware
@@ -80,14 +99,14 @@ text    data     bss     dec     hex filename
 10338     348    3676   14362    381a build/firmware.elf
 ```
 
-## 4. Flash
+## 3. Flash
 
-### 4.a JTAG setup
+TODO: waiting for PCB board
 
+### 3.a JTAG setup
 
+### 3.b STM32 adapter TSI setup
 
-### 4.b STM32 adapter TSI setup
-
-### 4.c Arty adapter TSI setup
+### 3.c Arty adapter TSI setup
 
 
