@@ -190,12 +190,17 @@ bss_init_entry:
 
   # see if bss section is of size 0?
   beq t0, t1, bss_init_exit
-  j bss_init_loop
 
 bss_init_loop:
+#if __riscv_xlen == 32
   lw zero, 0(t0)
   addi t0, t0, 4
   blt t0, t1, bss_init_loop
+#else
+  ld zero, 0(t0)
+  addi t0, t0, 8
+  blt t0, t1, bss_init_loop
+#endif
 
 bss_init_exit:
 

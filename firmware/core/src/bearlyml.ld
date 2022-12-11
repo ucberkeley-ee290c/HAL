@@ -37,9 +37,9 @@ SECTIONS {
     *(.gnu.linkonce.t.*)
   }> FLASH
 
-  PROVIDE(_text_target_start = ADDR(.data));
-  PROVIDE(_text_target_end = ADDR(.tdata) + SIZEOF(.tdata));
-  
+  PROVIDE(_data_source_start = LOADADDR(.text));
+  PROVIDE(_text_target_start = ADDR(.text));
+  PROVIDE(_text_target_end = ADDR(.text) + SIZEOF(.text));
   
   .rodata : {
     . = ALIGN(4);
@@ -107,6 +107,6 @@ SECTIONS {
     PROVIDE(_sp = .);
   }> SRAM
 
-  PROVIDE(_stack_start = ADDR(.heap));
-  PROVIDE(_stack_end = ADDR(.heap) + SIZEOF(.heap));
+  PROVIDE(_stack_start = ADDR(.stack));
+  PROVIDE(_stack_end = ADDR(.stack) + SIZEOF(.stack));
 }

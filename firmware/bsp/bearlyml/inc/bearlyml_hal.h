@@ -17,7 +17,7 @@ extern "C" {
 #include "bearlyml_hal_uart.h"
 
 
-#define SYS_CLK_FREQ  1000000                    // Hz
+#define SYS_CLK_FREQ  200000                    // Hz
 // #define SYS_CLK_FREQ  32000000                  // Hz
 #define MTIME_FREQ    (SYS_CLK_FREQ / 100000)    // tick per milliseconds
 
