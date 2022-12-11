@@ -45,29 +45,29 @@ C_SOURCES  = $(wildcard $(SRC_DIR)*.c) $(wildcard $(SRC_DIR)*/*.c)
 A_SOURCES += $(VENDOR_ROOT)$(CHIP)/startup/$(CHIP)_bootrom.S
 A_SOURCES += $(VENDOR_ROOT)$(CHIP)/startup/$(CHIP)_startup.S
 
-# # common drivers for all RV cores
-# C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal.c
-# C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_system.c
-# C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_core.c
-# C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_clint.c
-# C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_plic.c
+# common drivers for all RV cores
+C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal.c
+C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_system.c
+C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_core.c
+C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_clint.c
+C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_plic.c
 
-# ifeq ($(CHIP),oscibear)
-# C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_aes.c
-# C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_baseband.c
-# C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_gpio.c
-# C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_rcc.c
-# C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_uart.c
-# endif
-# ifeq ($(CHIP),bearlyml)
-# C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_gpio.c
-# C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_i2c.c
-# C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_rcc.c
-# C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_uart.c
-# endif
-# ifeq ($(CHIP),tinyrocket)
-# C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_uart.c
-# endif
+ifeq ($(CHIP),oscibear)
+C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_aes.c
+C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_baseband.c
+C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_gpio.c
+C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_rcc.c
+C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_uart.c
+endif
+ifeq ($(CHIP),bearlyml)
+C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_gpio.c
+C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_i2c.c
+C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_rcc.c
+C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_uart.c
+endif
+ifeq ($(CHIP),tinyrocket)
+C_SOURCES += $(VENDOR_ROOT)$(CHIP)/src/$(CHIP)_hal_uart.c
+endif
 
 INCLUDES  = -I$(INC_DIR)
 INCLUDES += -I$(INC_DIR)hal/
@@ -109,8 +109,7 @@ ARCH = rv32imac
 ABI = ilp32
 endif
 ifeq ($(CHIP),bearlyml)
-# ARCH = rv64imac
-ARCH = rv64ima
+ARCH = rv64imac
 ABI = lp64
 endif
 CODEMODEL = medany
