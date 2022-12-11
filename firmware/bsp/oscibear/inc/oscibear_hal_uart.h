@@ -29,6 +29,7 @@ typedef struct {
 /**
  * @brief Initialize the UART mode according to the specified
  *        parameters in the UART_InitTypeDef and initialize the associated handle.
+ * 
  * @param UARTx     UART instance.
  * @param UART_init UART configurations.
  */
