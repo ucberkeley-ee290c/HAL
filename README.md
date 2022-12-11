@@ -2,7 +2,7 @@
 
 ## Tutorials
 
-[Software Develop Environment Installation Tutorial](https://github.com/ucberkeley-ee290c/HAL/blob/main/firmware/README.md)
+[Software Development Environment Installation Tutorial](https://github.com/ucberkeley-ee290c/HAL/blob/main/firmware/README.md)
 
 [FPGA Tutorial](https://github.com/ucberkeley-ee290c/HAL/blob/main/fpga/README.md)
 
