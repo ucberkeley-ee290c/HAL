@@ -11,7 +11,8 @@ extern "C" {
 typedef enum {
   GPIO_PIN_0 = 0b0001U,
   GPIO_PIN_1 = 0b0010U,
-  GPIO_PIN_2 = 0b0100U
+  GPIO_PIN_2 = 0b0100U,
+  GPIO_PIN_3 = 0b1000U,
 } GPIO_PIN;
 
 typedef enum {
