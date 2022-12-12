@@ -127,7 +127,7 @@ typedef struct {
   __IO uint32_t TILE2_CLKGATE;    /** RocketTile 2 */   // 0x1010
   __IO uint32_t TILE3_CLKGATE;    /** RocketTile 3 */   // 0x1014
   __IO uint32_t TILE4_CLKGATE;    /** SaturnTile 4 */   // 0x1018
-  uint32_t RESERVED1[1018];
+  uint32_t RESERVED1[1017];
   __IO uint32_t CLK_SEL;          /** Selects the system clock. 0: External slow clock, 1: PLL clock */
   __IO uint32_t DEBUG_CLK_EN;                           // 0x2004
   __IO uint32_t DEBUG_CLK_SEL;                          // 0x2008
